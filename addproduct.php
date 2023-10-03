@@ -24,12 +24,32 @@ if (isset($_POST['submit'])) {
 
     <div class="container">
 
+    <?php
+    if (isset($_POST['btn-category'])) {
+        $category=$_POST['addcategory'];
+        $insert_cat="INSERT INTO `category`(`name`) values('$category')";
+        $conn_cat=mysqli_query($connection,$insert_cat);
+    }
+    ?>
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
-                <h2>Add users</h2>
-                <hr>
+                <form action='<?php echo $_SERVER['PHP_SELF'];?>' method='POST'>
+                <h2>Add category</h2>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                        placeholder="add category" name="addcategory" required>
+                </div>
+                <div class="col-sm-6">
+                 <input type="submit" class="form-control form-control-user btn btn-success" id="exampleFirstName"
+                        placeholder="product category" name="btn-category" required>
+                 </div>
+                 </div>
+            </form>
+            <hr>
+            <h2>Add products</h2>
         <form class="user" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" enctype='multipart/form-data'>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -37,9 +57,22 @@ if (isset($_POST['submit'])) {
                         placeholder="product title" name="title" required>
                 </div>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName"
-                        placeholder="product category" name="category" required>
-                 </div>
+               <select class="form-select" name='' aria-label="Default select example">
+                   echo '<option selected>Open this select menu</option>
+                <?php
+                $fetch_cat="SELECT*from `category` where status='1'";
+                $conn=mysqli_query($connection,$fetch_cat);
+                
+                if (mysqli_num_rows($conn)>0) {
+                    while ($data=mysqli_fetch_assoc($conn)) {
+                        echo '<option value="'.$data['id'].'">'.$data['name'].'</option>';
+                    }
+                }
+                
+                ?>
+              
+                
+                </select>
             </div>
             <div class="form-group">
                 <textarea type="email" class="form-control form-control-user" id="exampleInputEmail"
