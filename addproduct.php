@@ -57,8 +57,8 @@ if (isset($_POST['submit'])) {
                         placeholder="product title" name="title" required>
                 </div>
                 <div class="col-sm-6">
-               <select class="form-select" name='' aria-label="Default select example">
-                   echo '<option selected>Open this select menu</option>
+               <select class="form-select" name='category' aria-label="Default select example">
+                   echo '<option selected '>Open this select menu</option>
                 <?php
                 $fetch_cat="SELECT*from `category` where status='1'";
                 $conn=mysqli_query($connection,$fetch_cat);
@@ -74,6 +74,11 @@ if (isset($_POST['submit'])) {
                 
                 </select>
             </div>
+            <!-- <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user
+                        id="exampleRepeatPassword" placeholder="product category" name="category" required>
+                </div> -->
+            
             <div class="form-group">
                 <textarea type="email" class="form-control form-control-user" id="exampleInputEmail"
                     placeholder="product" name="des" required></textarea>

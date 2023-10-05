@@ -4,15 +4,19 @@ include('admin/includes/sidebar.php');
 include('admin/includes/topbar.php');
 include('config.php');
 
-$select="SELECT *FROM `product`";
+// display products
+
+$select="SELECT *FROM `product` as p inner join `category` as c on p.category = c.id order by category desc";
 
 $run_query=mysqli_query($connection,$select);
 
 if (mysqli_num_rows($run_query)>0) {
         
-    
 
+    
 ?>
+
+
 
 
     <div class="container">
@@ -43,7 +47,7 @@ if (mysqli_num_rows($run_query)>0) {
                     <tr>
                     <th scope="row"><?php echo $data['id']?></th>
                     <td><?php echo $data['title']?></td>
-                    <td><?php echo $data['category']?></td>
+                    <td><?php echo $data['name']?></td>
                     <td><?php echo $data['des']?></td>
                     <td ><img src="<?php echo 'image/'. $data['image']?>" width='100px' height='100px' alt=""></td>
                     <td ><?php echo $data['status']?></td>
