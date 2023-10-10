@@ -36,6 +36,8 @@ if (mysqli_num_rows($run_query)>0) {
                     <th scope="col">Description</th>
                     <th scope="col">Image</th>
                     <th scope="col">status</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +53,8 @@ if (mysqli_num_rows($run_query)>0) {
                     <td><?php echo $data['des']?></td>
                     <td ><img src="<?php echo 'image/'. $data['image']?>" width='100px' height='100px' alt=""></td>
                     <td ><?php echo $data['status']?></td>
+                    <td ><a class='btn btn-success' href="updateData.php?id=<?php echo $data['id']?>">update</a></td>
+                    <td ><a class='btn btn-danger' href="delete.php?id=<?php echo $data['id']?>">delete</a></td>
                     
                 </tr>
                 

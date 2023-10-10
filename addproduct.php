@@ -14,7 +14,8 @@ if (isset($_POST['submit'])) {
 
     move_uploaded_file($tmp_name,'image/'.$img_name);
 
-    $insert="INSERT INTO `product`(`title`,`category`,`des`,`image`) values('$pro_title','$pro_cat','$pro_des','$img_name')";
+    $insert="INSERT INTO `product`(`title`,`category`,`des`,`image`) 
+    values('$pro_title','$pro_cat','$pro_des','$img_name')";
     $run_query=mysqli_query($connection,$insert);
 }
 
