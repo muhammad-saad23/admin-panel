@@ -2,7 +2,7 @@
 include('admin/includes/header.php');
 include('admin/includes/sidebar.php');
 include('admin/includes/topbar.php');
-include('config.php');
+include('../config.php');
 
 // display products
 
@@ -42,9 +42,9 @@ if (mysqli_num_rows($run_query)>0) {
                 </thead>
                 <tbody>
                     <?php
-                        while ($data=mysqli_fetch_assoc($run_query)) {
 
-                    
+while ($data=mysqli_fetch_assoc($run_query)) {
+
                     ?>
                     <tr>
                     <th scope="row"><?php echo $data['id']?></th>
@@ -59,8 +59,8 @@ if (mysqli_num_rows($run_query)>0) {
                 </tr>
                 
                <?php
-               }
-            }
+}
+}
                ?>
                 </tbody>
             </table>

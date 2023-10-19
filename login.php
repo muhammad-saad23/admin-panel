@@ -1,3 +1,45 @@
+<?php
+include("../config.php");
+
+if (isset($_POST['submit'])) {
+    $log_email=$_POST['login_email'];    
+    $log_password=$_POST['login_password'];    
+    
+    $fetch="SELECT * from `register` where email = '$log_email'";
+    $run_query=mysqli_query($connection,$fetch);
+   
+
+    if ($run_query) {
+        if (mysqli_num_rows($run_query)>0) {
+            $data=mysqli_fetch_assoc($run_query);
+            // print_r($data);
+            // die();
+
+            $db_pass=$data['password'];
+
+            if ($db_pass == $log_password) {
+                session_start();
+                $_SESSION['useremail']=$data['email'];
+                $_SESSION['userpassword']=$data['password'];
+
+                echo "<script> alert('login successfully')
+                window.location.href='index.php';
+               </script>";
+            
+            }else{
+                echo "<script> alert(invaild password)</script>";
+            }
+        }else{
+            echo "query failed";
+        }
+    }
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,15 +84,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="<?php echo $_SERVER['PHP_SELF'];?>" method='POST'>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                              name='login_email'  placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                            name='login_password'  id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -59,9 +101,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <input type="submit" class='btn btn-primary w-100' value='login' name='submit'>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
